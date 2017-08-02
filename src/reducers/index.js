@@ -4,8 +4,9 @@ import {
 } from '../actions'
 
 const images = (state = {}, action) => {
-  switch (action){
-    case GET_IMAGES_START: break;
+  switch (action.type){
+    case GET_IMAGES_START: return { ...state, loading: true };
+    case GET_IMAGES_FINISH: return { ...state, loading: true, images: action.images };
     default: return state;
   }
 };
