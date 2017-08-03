@@ -50,9 +50,9 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-  bindIncRate: () => dispatch(incRate()),
-  bindDecRate: () => dispatch(decRate()),
-  bindFetchImages: () => dispatch(fetchImages()),
+  bindIncRate: id => dispatch(incRate(id)),
+  bindDecRate: id => dispatch(decRate(id)),
+  bindFetchImages: id => dispatch(fetchImages(id)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(App)
