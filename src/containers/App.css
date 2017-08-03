@@ -9,8 +9,10 @@
 }
 
 .content {
-    position: absolute;
-    padding: 5% 85%;
+    position:absolute;
+    height:90%;
+    width:90%;
+    padding: 5%;
 }
 
 .bg {

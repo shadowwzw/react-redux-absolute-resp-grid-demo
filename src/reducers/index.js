@@ -6,7 +6,7 @@ import {
 const images = (state = {}, action) => {
   switch (action.type){
     case GET_IMAGES_START: return { ...state, loading: true };
-    case GET_IMAGES_FINISH: return { ...state, loading: true, listOfImages: action.images };
+    case GET_IMAGES_FINISH: return { ...state, loading: true, listOfImages: action.images.map(item => ({...item, rate: 0 })) };
     default: return state;
   }
 };
