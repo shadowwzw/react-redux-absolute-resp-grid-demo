@@ -37,9 +37,10 @@ class App extends Component {
   render() {
     console.log('this.props in app = ', this.props);
     const { images: { listOfImages, loading } } = this.props;
+    const sortedListOfImages = listOfImages && listOfImages.sort && listOfImages.sort((a, b) => b.rate - a.rate);
     return (
       <div>
-        {listOfImages && listOfImages.map((image, index) => <div key={image.id} onClick={(e) => this.handleClick(e, image.id)} onContextMenu={(e) => this.handleClick(e, image.id)} className="square bg" style={{backgroundImage: `url("${image.src}")`}}><div className="content">{image.rate}</div></div>)}
+        {sortedListOfImages && sortedListOfImages.map((image, index) => <div key={image.id} onClick={(e) => this.handleClick(e, image.id)} onContextMenu={(e) => this.handleClick(e, image.id)} className="square bg" style={{backgroundImage: `url("${image.src}")`}}><div className="content">{image.rate}</div></div>)}
       </div>
     )
   }
