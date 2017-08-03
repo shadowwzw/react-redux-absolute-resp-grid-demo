@@ -2,6 +2,9 @@
   "images": [
     { "id": 1, "src": "/cats/d@ra_last_cats (1).jpg"},
     { "id": 2, "src": "/cats/d@ra_last_cats (2).jpg"},
-    { "id": 3, "src": "/cats/d@ra_last_cats (3).jpg"}
+    { "id": 3, "src": "/cats/d@ra_last_cats (3).jpg"},
+    { "id": 4, "src": "/cats/d@ra_last_cats (4).jpg"},
+    { "id": 5, "src": "/cats/d@ra_last_cats (5).jpg"},
+    { "id": 6, "src": "/cats/d@ra_last_cats (6).jpg"}
   ]
 }

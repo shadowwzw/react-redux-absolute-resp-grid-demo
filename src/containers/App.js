@@ -4,6 +4,7 @@ import { connect } from 'react-redux'
 import { fetchImages } from '../actions'
 import Picker from '../components/Picker'
 import Posts from '../components/Posts'
+import './App.css';
 
 class App extends Component {
   static propTypes = {
@@ -39,7 +40,13 @@ class App extends Component {
   // }
 
   render() {
-    return <div>Hi!</div>
+    console.log('this.props in app = ', this.props);
+    const { images: { listOfImages, loading } } = this.props;
+    return (
+      <div>
+        {listOfImages && listOfImages.map((image, index) => <div key={image.id} className="square bg" style={{backgroundImage: `url("${image.src}")`}}><div className="content">{10}</div></div>)}
+      </div>
+    )
     // const { selectedReddit, posts, isFetching, lastUpdated } = this.props
     // const isEmpty = posts.length === 0
     // return (
@@ -72,7 +79,7 @@ class App extends Component {
 }
 
 const mapStateToProps = state => ({
-
+  images: state.images,
 });
 
 export default connect(mapStateToProps)(App)
