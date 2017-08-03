@@ -12,19 +12,24 @@ class App extends Component {
 
   static propTypes = {
     images: PropTypes.object.isRequired,
+    bindIncRate: PropTypes.func.isRequired,
+    bindDecRate: PropTypes.func.isRequired,
+    bindFetchImages: PropTypes.func.isRequired,
   };
 
   componentDidMount() {
-    const { dispatch } = this.props;
-    dispatch(fetchImages());
+    const { bindFetchImages } = this.props;
+    bindFetchImages();
   }
 
-  handleClick(e) {
+  handleClick(e, id) {
+    const { bindIncRate, bindDecRate } = this.props;
+    e.preventDefault();
     console.log(e.type);
     switch(e.type){
-      case 'click': break;
-      case 'contextmenu': break;
-      default: break;
+      case 'click': bindIncRate(id); break;
+      case 'contextmenu': bindDecRate(id); break;
+      default: return;
     }
   }
 
@@ -34,7 +39,7 @@ class App extends Component {
     const { images: { listOfImages, loading } } = this.props;
     return (
       <div>
-        {listOfImages && listOfImages.map((image, index) => <div key={image.id} onClick={this.handleClick} onContextMenu={this.handleClick} className="square bg" style={{backgroundImage: `url("${image.src}")`}}><div className="content">{image.rate}</div></div>)}
+        {listOfImages && listOfImages.map((image, index) => <div key={image.id} onClick={(e) => this.handleClick(e, image.id)} onContextMenu={(e) => this.handleClick(e, image.id)} className="square bg" style={{backgroundImage: `url("${image.src}")`}}><div className="content">{image.rate}</div></div>)}
       </div>
     )
   }
@@ -44,4 +49,10 @@ const mapStateToProps = state => ({
   images: state.images,
 });
 
-export default connect(mapStateToProps)(App)
+const mapDispatchToProps = dispatch => ({
+  bindIncRate: () => dispatch(incRate()),
+  bindDecRate: () => dispatch(decRate()),
+  bindFetchImages: () => dispatch(fetchImages()),
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(App)
