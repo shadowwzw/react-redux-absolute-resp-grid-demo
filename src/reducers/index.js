@@ -10,7 +10,7 @@ import {
 const images = (state = {}, action) => {
   switch (action.type){
     case GET_IMAGES_START: return { ...state, loading: true };
-    case GET_IMAGES_FINISH: return { ...state, loading: true, listOfImages: action.images };
+    case GET_IMAGES_FINISH: return { ...state, loading: false, listOfImages: action.images };
     case INC_RATE: return { ...state, listOfImages: [ ...state.listOfImages.map(item => item.id === action.id ? { ...item, rate: item.rate+1 } : item) ] };
     case DEC_RATE: return { ...state, listOfImages: [ ...state.listOfImages.map(item => item.id === action.id ? { ...item, rate: item.rate-1 } : item) ] };
     default: return state;

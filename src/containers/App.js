@@ -3,6 +3,7 @@ import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import { fetchImages, incRate, decRate } from '../actions'
 import Square from '../components/Square';
+import Loader from '../components/Loader';
 import './App.css';
 
 
@@ -50,13 +51,16 @@ class App extends Component {
     const sortedListOfImages = listOfImages && listOfImages.sort && [...listOfImages].sort((a, b) => b.rate - a.rate);
     const sortedListWithPosition = sortedListOfImages && sortedListOfImages.map((item, index) => ({...item, left: `${33 * (index % 3)}%`, top: (containerWidth / 3) * Math.floor(index / 3) || 0 }));
     return (
-      <div className="container">
-        {listOfImages && listOfImages.map((image, index) =>
-          <Square key={image.id}
-                  image={image}
-                  sortedListWithPosition={sortedListWithPosition}
-                  handleClick={this.handleClick}
-          /> ) }
+      <div>
+        <Loader enabled={loading}/>
+        <div className="container">
+          {listOfImages && listOfImages.map((image, index) =>
+            <Square key={image.id}
+                    image={image}
+                    sortedListWithPosition={sortedListWithPosition}
+                    handleClick={this.handleClick}
+            /> ) }
+        </div>
       </div>
     )
   }
