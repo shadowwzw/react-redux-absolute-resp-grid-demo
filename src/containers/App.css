@@ -5,6 +5,7 @@
     margin:1.66%;
     background-color:#1E1E1E;
     overflow:hidden;
+    transition: all 1s;
 }
 
 .content {
