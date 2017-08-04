@@ -4,6 +4,7 @@ import { connect } from 'react-redux'
 import { fetchImages, incRate, decRate } from '../actions'
 import Square from '../components/Square';
 import Loader from '../components/Loader';
+import Error from '../components/Error';
 import './App.css';
 
 
@@ -45,14 +46,15 @@ class App extends Component {
 
   render() {
     // console.log('this.props in app = ', this.props);
-    const { images: { listOfImages, loading } } = this.props;
+    const { images: { listOfImages, loading, error } } = this.props;
     const { containerWidth = 0 } = this.state || {};
     // console.log(this.state);
     const sortedListOfImages = listOfImages && listOfImages.sort && [...listOfImages].sort((a, b) => b.rate - a.rate);
     const sortedListWithPosition = sortedListOfImages && sortedListOfImages.map((item, index) => ({...item, left: `${33 * (index % 3)}%`, top: (containerWidth / 3) * Math.floor(index / 3) || 0 }));
     return (
       <div>
-        <Loader enabled={loading}/>
+        <Loader enabled={loading && !error}/>
+        <Error message={error}/>
         <div className="container">
           {listOfImages && listOfImages.map((image, index) =>
             <Square key={image.id}

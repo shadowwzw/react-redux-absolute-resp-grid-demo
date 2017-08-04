@@ -17,9 +17,12 @@ export const decRate = id => ({
 
 export const fetchImages = () => async (dispatch, getState) => {
   dispatch({ type: GET_IMAGES_START });
-  const result = await fetch('images.json');
-  const json = await result.json();
-  // console.log('json = ', json);
-  dispatch({ type: GET_IMAGES_FINISH, images: json.images});
+  try {
+    const result = await fetch('images1.json');
+    const json = await result.json();
+    dispatch({ type: GET_IMAGES_FINISH, images: json.images});
     return Promise.resolve();
+  } catch (e) {
+    dispatch({ type: GET_IMAGES_ERROR, error: e.message});
+  }
 };
