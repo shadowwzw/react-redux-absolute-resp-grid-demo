@@ -2,9 +2,9 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import { fetchImages, incRate, decRate } from '../actions'
+import Square from '../components/Square';
 import './App.css';
 
-const getFromId = (item2) => item => item.id === item2.id;
 
 class App extends Component {
   constructor(props){
@@ -47,19 +47,17 @@ class App extends Component {
     // console.log('this.props in app = ', this.props);
     const { images: { listOfImages, loading } } = this.props;
     const { containerWidth = 0 } = this.state || {};
-    console.log(this.state);
+    // console.log(this.state);
     const sortedListOfImages = listOfImages && listOfImages.sort && [...listOfImages].sort((a, b) => b.rate - a.rate);
     const sortedListWithPosition = sortedListOfImages && sortedListOfImages.map((item, index) => ({...item, left: `${33 * (index % 3)}%`, top: (containerWidth / 3) * Math.floor(index / 3) || 0 }));
     return (
       <div className="container">
         {listOfImages && listOfImages.map((image, index) =>
-          <div key={image.id}
-               onClick={(e) => this.handleClick(e, image.id)}
-               onContextMenu={(e) => this.handleClick(e, image.id)}
-               className="square bg"
-               style={{left: sortedListWithPosition.filter(getFromId(image))[0].left, top: sortedListWithPosition.filter(getFromId(image))[0].top || 0, backgroundImage: `url("${image.src}")`}}>
-            <div className="content">{image.rate}</div>
-          </div>)}
+          <Square key={image.id}
+                  image={image}
+                  sortedListWithPosition={sortedListWithPosition}
+                  handleClick={this.handleClick}
+          /> ) }
       </div>
     )
   }
