@@ -20,12 +20,20 @@ class App extends Component {
   componentDidMount() {
     const { bindFetchImages } = this.props;
     bindFetchImages();
+    const container = document.getElementsByClassName("container")[0];
+    const containerWidth = () => container && parseInt( window.getComputedStyle(container).width, 10);
+    window.addEventListener("resize", () => this.setState({
+      containerWidth: containerWidth()
+    }));
+    this.setState({
+      containerWidth: containerWidth()
+    });
   }
 
   handleClick(e, id) {
     const { bindIncRate, bindDecRate } = this.props;
     e.preventDefault();
-    console.log(e.type);
+    // console.log(e.type);
     switch(e.type){
       case 'click': bindIncRate(id); break;
       case 'contextmenu': bindDecRate(id); break;
@@ -33,14 +41,23 @@ class App extends Component {
     }
   }
 
-
   render() {
-    console.log('this.props in app = ', this.props);
+    // console.log('this.props in app = ', this.props);
     const { images: { listOfImages, loading } } = this.props;
-    const sortedListOfImages = listOfImages && listOfImages.sort && listOfImages.sort((a, b) => b.rate - a.rate);
+    const { containerWidth = 0 } = this.state || {};
+    console.log(this.state);
+    const sortedListOfImages = listOfImages && listOfImages.sort && [...listOfImages].sort((a, b) => b.rate - a.rate);
+    const sortedListWithPosition = sortedListOfImages && sortedListOfImages.map((item, index) => ({...item, left: `${33 * (index % 3)}%`, top: (containerWidth / 3) * Math.floor(index / 3) || 0 }));
     return (
-      <div>
-        {sortedListOfImages && sortedListOfImages.map((image, index) => <div key={image.id} onClick={(e) => this.handleClick(e, image.id)} onContextMenu={(e) => this.handleClick(e, image.id)} className="square bg" style={{backgroundImage: `url("${image.src}")`}}><div className="content">{image.rate}</div></div>)}
+      <div className="container">
+        {listOfImages && listOfImages.map((image, index) =>
+          <div key={image.id}
+               onClick={(e) => this.handleClick(e, image.id)}
+               onContextMenu={(e) => this.handleClick(e, image.id)}
+               className="square bg"
+               style={{left: `${33 * (index % 3)}%`, top: (containerWidth / 3) * Math.floor(index / 3) || 0, backgroundImage: `url("${image.src}")`}}>
+            <div className="content">{image.rate}</div>
+          </div>)}
       </div>
     )
   }

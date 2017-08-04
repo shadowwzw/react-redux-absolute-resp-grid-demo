@@ -1,6 +1,5 @@
 .square {
-    float:left;
-    position: relative;
+    position: absolute;
     width: 30%;
     padding-bottom : 30%; /* = width for a 1:1 aspect ratio */
     margin:1.66%;
@@ -22,4 +21,9 @@
     background-repeat:no-repeat;
     background-size:cover; /* you change this to "contain" if you don't want the images to be cropped */
     color:#fff;
+}
+
+.container {
+    position: relative;
+    width: 100%;
 }
