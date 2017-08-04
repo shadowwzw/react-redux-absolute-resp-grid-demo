@@ -55,7 +55,7 @@ class App extends Component {
                onClick={(e) => this.handleClick(e, image.id)}
                onContextMenu={(e) => this.handleClick(e, image.id)}
                className="square bg"
-               style={{left: `${33 * (index % 3)}%`, top: (containerWidth / 3) * Math.floor(index / 3) || 0, backgroundImage: `url("${image.src}")`}}>
+               style={{left: sortedListWithPosition.filter(itemL => itemL.id === image.id )[0].left, top: sortedListWithPosition.filter(itemT => itemT.id === image.id )[0].top || 0, backgroundImage: `url("${image.src}")`}}>
             <div className="content">{image.rate}</div>
           </div>)}
       </div>
