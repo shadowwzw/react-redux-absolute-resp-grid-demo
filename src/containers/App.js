@@ -54,7 +54,7 @@ class App extends Component {
     return (
       <div>
         <Loader enabled={loading && !error}/>
-        <Error message={error}/>
+        {error && <Error message={error}/>}
         <div className="container">
           {listOfImages && listOfImages.map((image, index) =>
             <Square key={image.id}
