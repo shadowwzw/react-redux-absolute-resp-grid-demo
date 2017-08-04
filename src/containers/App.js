@@ -4,6 +4,8 @@ import { connect } from 'react-redux'
 import { fetchImages, incRate, decRate } from '../actions'
 import './App.css';
 
+const getFromId = (item2) => item => item.id === item2.id;
+
 class App extends Component {
   constructor(props){
     super(props);
@@ -55,7 +57,7 @@ class App extends Component {
                onClick={(e) => this.handleClick(e, image.id)}
                onContextMenu={(e) => this.handleClick(e, image.id)}
                className="square bg"
-               style={{left: sortedListWithPosition.filter(itemL => itemL.id === image.id )[0].left, top: sortedListWithPosition.filter(itemT => itemT.id === image.id )[0].top || 0, backgroundImage: `url("${image.src}")`}}>
+               style={{left: sortedListWithPosition.filter(getFromId(image))[0].left, top: sortedListWithPosition.filter(getFromId(image))[0].top || 0, backgroundImage: `url("${image.src}")`}}>
             <div className="content">{image.rate}</div>
           </div>)}
       </div>
