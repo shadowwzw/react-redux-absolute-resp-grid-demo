@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import ReactDOM from 'react-dom';
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import { fetchImages, incRate, decRate } from '../actions'
@@ -24,7 +25,7 @@ class App extends Component {
   componentDidMount() {
     const { bindFetchImages } = this.props;
     bindFetchImages();
-    const container = document.getElementsByClassName("container")[0];
+    const container = ReactDOM.findDOMNode(this.refs.container);
     const containerWidth = () => container && parseInt( window.getComputedStyle(container).width, 10);
     const updateWidthInState = () => this.setState({
       containerWidth: containerWidth()
@@ -55,7 +56,7 @@ class App extends Component {
       <div>
         <Loader enabled={loading && !error}/>
         {error && <Error message={error}/>}
-        <div className="container">
+        <div className="container" ref="container">
           {listOfImages && listOfImages.map((image, index) =>
             <Square key={image.id}
                     image={image}
