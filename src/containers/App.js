@@ -24,12 +24,11 @@ class App extends Component {
     bindFetchImages();
     const container = document.getElementsByClassName("container")[0];
     const containerWidth = () => container && parseInt( window.getComputedStyle(container).width, 10);
-    window.addEventListener("resize", () => this.setState({
-      containerWidth: containerWidth()
-    }));
-    this.setState({
+    const updateWidthInState = () => this.setState({
       containerWidth: containerWidth()
     });
+    window.addEventListener("resize", () => updateWidthInState());
+    updateWidthInState();
   }
 
   handleClick(e, id) {
