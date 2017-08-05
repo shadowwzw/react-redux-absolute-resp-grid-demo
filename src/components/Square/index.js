@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import './square.css';
 
 const getFromId = (item2) => item => item.id === item2.id;
 

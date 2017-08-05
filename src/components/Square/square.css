@@ -1,0 +1,18 @@
+.square {
+    position: absolute;
+    width: 30%;
+    padding-bottom : 30%; /* = width for a 1:1 aspect ratio */
+    margin:1.66%;
+    background-color:#1E1E1E;
+    overflow:hidden;
+    transition: all 1s;
+}
+
+.content {
+    position:absolute;
+    height:90%;
+    width:90%;
+    padding: 5%;
+    font-size: 20px;
+    text-shadow: red 0 0 10px;
+}
