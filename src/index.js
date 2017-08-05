@@ -7,6 +7,7 @@ import { composeWithDevTools } from 'redux-devtools-extension';
 import { createLogger } from 'redux-logger'
 import reducer from './reducers'
 import App from './containers/App'
+import * as config from './config/index';
 
 const middleware = [ thunk ];
 if (process.env.NODE_ENV !== 'production') {
@@ -21,7 +22,7 @@ const store = createStore(
 
 render(
   <Provider store={store}>
-    <App />
+    <App config={config} />
   </Provider>,
   document.getElementById('root')
 );

@@ -21,6 +21,7 @@ class App extends Component {
     bindDecRate: PropTypes.func.isRequired,
     bindFetchImages: PropTypes.func.isRequired,
     bindSetContainerWidth: PropTypes.func.isRequired,
+    config: PropTypes.object.isRequired,
   };
 
   componentDidMount() {
@@ -43,7 +44,7 @@ class App extends Component {
   }
 
   render() {
-    const { images: { listOfImages, sortedListWithPosition, loading, error } } = this.props;
+    const { images: { listOfImages, sortedListWithPosition, loading, error }, config } = this.props;
     return (
       <div>
         <Loader enabled={loading && !error}/>
@@ -54,6 +55,7 @@ class App extends Component {
                     image={image}
                     sortedListWithPosition={sortedListWithPosition || listOfImages}
                     handleClick={this.handleClick}
+                    pathname={config.pathname}
             /> ) }
         </div>
       </div>
