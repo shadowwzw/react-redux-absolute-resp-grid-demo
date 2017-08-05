@@ -46,6 +46,7 @@ const images = (state = {}, action) => {
     case SET_WIDTH_CONTAINER: return {
       ...state,
       containerWidth: action.containerWidth,
+      sortedListWithPosition: calcPosForLiftOfImages(state.listOfImages || [], action.containerWidth || 0),
     };
     default: return state;
   }
