@@ -21,7 +21,6 @@ export const fetchImages = () => async (dispatch, getState) => {
     const result = await fetch('images.json');
     const json = await result.json();
     dispatch({ type: GET_IMAGES_FINISH, images: json.images});
-    return Promise.resolve();
   } catch (e) {
     dispatch({ type: GET_IMAGES_ERROR, error: e.message});
   }
