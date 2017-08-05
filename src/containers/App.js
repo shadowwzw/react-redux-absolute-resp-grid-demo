@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import ReactDOM from 'react-dom';
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
-import { fetchImages, incRate, decRate } from '../actions'
+import { fetchImages, incRate, decRate, setContainerWidth } from '../actions'
 import Square from '../components/Square';
 import Loader from '../components/Loader';
 import Error from '../components/Error';
@@ -20,24 +20,21 @@ class App extends Component {
     bindIncRate: PropTypes.func.isRequired,
     bindDecRate: PropTypes.func.isRequired,
     bindFetchImages: PropTypes.func.isRequired,
+    bindSetContainerWidth: PropTypes.func.isRequired,
   };
 
   componentDidMount() {
-    const { bindFetchImages } = this.props;
+    const { bindFetchImages, bindSetContainerWidth } = this.props;
     bindFetchImages();
     const container = ReactDOM.findDOMNode(this.refs.container);
     const containerWidth = () => container && parseInt( window.getComputedStyle(container).width, 10);
-    const updateWidthInState = () => this.setState({
-      containerWidth: containerWidth()
-    });
-    window.addEventListener("resize", () => updateWidthInState());
-    updateWidthInState();
+    window.addEventListener("resize", () => bindSetContainerWidth(containerWidth()));
+    bindSetContainerWidth(containerWidth());
   }
 
   handleClick(e, id) {
     const { bindIncRate, bindDecRate } = this.props;
     e.preventDefault();
-    // console.log(e.type);
     switch(e.type){
       case 'click': bindIncRate(id); break;
       case 'contextmenu': bindDecRate(id); break;
@@ -46,12 +43,7 @@ class App extends Component {
   }
 
   render() {
-    // console.log('this.props in app = ', this.props);
-    const { images: { listOfImages, loading, error } } = this.props;
-    const { containerWidth = 0 } = this.state || {};
-    // console.log(this.state);
-    const sortedListOfImages = listOfImages && listOfImages.sort && [...listOfImages].sort((a, b) => b.rate - a.rate);
-    const sortedListWithPosition = sortedListOfImages && sortedListOfImages.map((item, index) => ({...item, left: `${33 * (index % 3)}%`, top: (containerWidth / 3) * Math.floor(index / 3) || 0 }));
+    const { images: { listOfImages, sortedListWithPosition, loading, error } } = this.props;
     return (
       <div>
         <Loader enabled={loading && !error}/>
@@ -60,7 +52,7 @@ class App extends Component {
           {listOfImages && listOfImages.map((image, index) =>
             <Square key={image.id}
                     image={image}
-                    sortedListWithPosition={sortedListWithPosition}
+                    sortedListWithPosition={sortedListWithPosition || listOfImages}
                     handleClick={this.handleClick}
             /> ) }
         </div>
@@ -77,6 +69,7 @@ const mapDispatchToProps = dispatch => ({
   bindIncRate: id => dispatch(incRate(id)),
   bindDecRate: id => dispatch(decRate(id)),
   bindFetchImages: id => dispatch(fetchImages(id)),
+  bindSetContainerWidth: containerWidth => dispatch(setContainerWidth(containerWidth)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(App)
