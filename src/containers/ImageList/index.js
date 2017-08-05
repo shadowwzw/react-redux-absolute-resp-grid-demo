@@ -2,11 +2,11 @@ import React, { Component } from 'react'
 import ReactDOM from 'react-dom';
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
-import { fetchImages, incRate, decRate, setContainerWidth } from '../actions'
-import Square from '../components/Square';
-import Loader from '../components/Loader';
-import Error from '../components/Error';
-import './App.css';
+import { fetchImages, incRate, decRate, setContainerWidth } from '../../actions/index'
+import Square from '../../components/Square/index';
+import Loader from '../../components/Loader/index';
+import Error from '../../components/Error/index';
+import './imageList.css';
 
 
 class App extends Component {
