@@ -14,7 +14,12 @@ const calcPosForLiftOfImages  = (listOfImages, containerWidth) => [...listOfImag
 const images = (state = {}, action) => {
   switch (action.type){
     case GET_IMAGES_START: return { ...state, loading: true };
-    case GET_IMAGES_FINISH: return { ...state, loading: false, listOfImages: action.images };
+    case GET_IMAGES_FINISH: return {
+      ...state,
+      loading: false,
+      listOfImages: action.images,
+      sortedListWithPosition: calcPosForLiftOfImages(action.images, state.containerWidth || 0),
+    };
     case GET_IMAGES_ERROR: return { ...state, loading: false, error: action.error };
     case INC_RATE: {
       const listOfImages = [...state.listOfImages.map(item => item.id === action.id ? {
