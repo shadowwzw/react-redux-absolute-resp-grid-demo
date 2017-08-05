@@ -35,7 +35,7 @@ export const fetchImages = () => async (dispatch, getState) => {
     const result = await fetch('images.json');
     const json = await result.json();
     dispatch({ type: GET_IMAGES_FINISH, images: json.images});
-    setTimeout(()=>dispatch(setOpacity(1)), 1);
+    setTimeout(()=>dispatch(setOpacity(1)), 100);
   } catch (e) {
     dispatch({ type: GET_IMAGES_ERROR, error: e.message});
   }
