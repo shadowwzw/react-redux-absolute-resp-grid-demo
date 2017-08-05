@@ -6,10 +6,17 @@ import {
   INC_RATE,
   DEC_RATE,
   SET_WIDTH_CONTAINER,
+  SET_OPACITY,
 } from '../actions'
 
-const calcPosForLiftOfImages  = (listOfImages, containerWidth) => [...listOfImages].sort((a, b) => (b.rate - a.rate) || (b.id - a.id))
-  .map((item, index) => ({...item, left: `${33 * (index % 3)}%`, top: (containerWidth / 3) * Math.floor(index / 3) || 0 }));
+const calcPosForLiftOfImages  = (listOfImages, containerWidth, opacity = 0) => [...listOfImages].sort((a, b) => (b.rate - a.rate) || (b.id - a.id))
+  .map((item, index) => ({
+    ...item,
+    left: `${33 * (index % 3)}%`,
+    top: (containerWidth / 3) * Math.floor(index / 3) || 0,
+    opacityDelay: (index/3).toFixed(1),
+    opacity
+  }));
 
 const images = (state = {}, action) => {
   switch (action.type){
@@ -29,7 +36,7 @@ const images = (state = {}, action) => {
       return {
         ...state,
         listOfImages,
-        sortedListWithPosition: calcPosForLiftOfImages(listOfImages, state.containerWidth || 0),
+        sortedListWithPosition: calcPosForLiftOfImages(listOfImages, state.containerWidth || 0, state.opacity),
       };
     }
     case DEC_RATE: {
@@ -40,13 +47,18 @@ const images = (state = {}, action) => {
       return {
         ...state,
         listOfImages,
-        sortedListWithPosition: calcPosForLiftOfImages(listOfImages, state.containerWidth || 0),
+        sortedListWithPosition: calcPosForLiftOfImages(listOfImages, state.containerWidth || 0, state.opacity),
       };
     }
     case SET_WIDTH_CONTAINER: return {
       ...state,
       containerWidth: action.containerWidth,
-      sortedListWithPosition: calcPosForLiftOfImages(state.listOfImages || [], action.containerWidth || 0),
+      sortedListWithPosition: calcPosForLiftOfImages(state.listOfImages || [], action.containerWidth || 0, state.opacity),
+    };
+    case SET_OPACITY: return {
+      ...state,
+      sortedListWithPosition: calcPosForLiftOfImages(state.listOfImages || [], state.containerWidth || 0, action.opacity),
+      opacity: action.opacity,
     };
     default: return state;
   }

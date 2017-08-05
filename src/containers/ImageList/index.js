@@ -25,7 +25,7 @@ class App extends Component {
   };
 
   componentDidMount() {
-    const { bindFetchImages, bindSetContainerWidth } = this.props;
+    const { bindFetchImages, bindSetContainerWidth, bindSetOpacity } = this.props;
     bindFetchImages();
     const container = ReactDOM.findDOMNode(this.refs.container);
     const containerWidth = () => container && parseInt( window.getComputedStyle(container).width, 10);

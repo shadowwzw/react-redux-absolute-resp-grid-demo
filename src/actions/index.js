@@ -7,6 +7,13 @@ export const DEC_RATE = 'DEC_RATE';
 
 export const SET_WIDTH_CONTAINER = 'SET_WIDTH_CONTAINER';
 
+export const SET_OPACITY = 'SET_OPACITY';
+
+export const setOpacity = (opacity) => ({
+  type: SET_OPACITY,
+  opacity,
+});
+
 export const setContainerWidth = containerWidth => ({
   type: SET_WIDTH_CONTAINER,
   containerWidth,
@@ -28,6 +35,7 @@ export const fetchImages = () => async (dispatch, getState) => {
     const result = await fetch('images.json');
     const json = await result.json();
     dispatch({ type: GET_IMAGES_FINISH, images: json.images});
+    setTimeout(()=>dispatch(setOpacity(1)), 1);
   } catch (e) {
     dispatch({ type: GET_IMAGES_ERROR, error: e.message});
   }
