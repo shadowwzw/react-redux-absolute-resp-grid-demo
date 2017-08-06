@@ -1,0 +1,38 @@
+.header {
+    height: 35px;
+}
+
+.github-corner:hover .octo-arm {
+    animation: octocat-wave 560ms ease-in-out
+}
+
+@keyframes octocat-wave {
+    0%, 100% {
+        transform: rotate(0)
+    }
+    20%, 60% {
+        transform: rotate(-25deg)
+    }
+    40%, 80% {
+        transform: rotate(10deg)
+    }
+}
+
+.github-svg {
+    fill: #151513;
+    color: #fff;
+    position: absolute;
+    top: 0;
+    border: 0;
+    right: 0;
+}
+
+@media screen and (max-width: 480px) {
+    .github-svg {
+        height: 30px;
+        width: 30px;
+    }
+    .header {
+        height: 10px;
+    }
+}
