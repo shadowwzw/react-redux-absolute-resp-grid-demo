@@ -3,6 +3,7 @@ import './header.css';
 
 export default () => (
   <div className="header">
+    react-redux-absolute-resp-grid-demo
     <a rel="noopener noreferrer" target="_blank" href="https://github.com/shadowwzw/react-redux-absolute-resp-grid-demo" className="github-corner" aria-label="View source on Github">
       <svg className="github-svg" width="50" height="50" viewBox="0 0 250 250" aria-hidden="true">
         <path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z" />

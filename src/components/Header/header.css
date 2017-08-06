@@ -1,5 +1,9 @@
 .header {
+    font-family: "Arial Black";
+    font-size: large;
     height: 35px;
+    text-align: center;
+    transistion: font-size 1s;
 }
 
 .github-corner:hover .octo-arm {
@@ -33,6 +37,7 @@
         width: 30px;
     }
     .header {
-        height: 10px;
+        height: 12px;
+        font-size: small;
     }
 }
