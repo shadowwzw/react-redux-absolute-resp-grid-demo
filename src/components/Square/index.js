@@ -5,7 +5,7 @@ import './square.css';
 const idFilter = (item2) => item => item.id === item2.id;
 const getElementFromId = (array, image) => array.filter(idFilter(image))[0];
 
-const Square = ({ image, sortedListWithPosition, handleClick, pathname, opacity }) => {
+const Square = ({ image, sortedListWithPosition, handleClick, pathname }) => {
   const currentElement = getElementFromId(sortedListWithPosition, image);
   return (
   <div onClick={(e) => handleClick(e, image.id)}
@@ -21,7 +21,7 @@ const Square = ({ image, sortedListWithPosition, handleClick, pathname, opacity 
     <div className="content">{image.rate}</div>
   </div>)};
 
-Square.PropTypes = {
+Square.propTypes = {
   image: PropTypes.object.isRequired,
   sortedListWithPosition: PropTypes.array.isRequired,
   handleClick: PropTypes.func.isRequired,

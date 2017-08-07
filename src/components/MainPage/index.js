@@ -8,7 +8,7 @@ const MainPage = ({config})=> (<div>
   <ImageList config={config} />
 </div>);
 
-MainPage.PropTypes = {
+MainPage.propTypes = {
   config: PropTypes.object.isRequired,
 };
 
