@@ -1,3 +1,5 @@
+[![build status](https://travis-ci.org/shadowwzw/react-redux-absolute-resp-grid-demo.svg?branch=master)](https://travis-ci.org/shadowwzw/react-redux-absolute-resp-grid-demo)
+
 You can try [DEMO](https://shadowwzw.github.io/react-redux-absolute-resp-grid-demo/).
 
 This project was bootstrapped with [Create React App](https://github.com/facebookincubator/create-react-app).
